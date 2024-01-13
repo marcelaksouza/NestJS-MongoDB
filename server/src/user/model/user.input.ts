@@ -4,7 +4,7 @@ import { IsEmail, IsString } from 'class-validator'
 export class CreateUserInput {
   @IsString() fullName: string
   @IsEmail() email: string
-  @IsEmail() bio: string
+  @IsString() bio: string
   @IsString() password: string
 }
 export class UpdateUserInput extends OmitType(CreateUserInput, ['password'] as const) {}
