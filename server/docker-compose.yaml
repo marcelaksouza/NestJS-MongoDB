@@ -1,0 +1,19 @@
+# Docker Compose Configuration
+# visit https://docs.docker.com/compose/
+
+version: '3.9'
+services:
+
+  # server container
+  server:
+    container_name: server-container
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      SERVER_PORT: ${SERVER_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_URI: ${DATABASE_URI}
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+

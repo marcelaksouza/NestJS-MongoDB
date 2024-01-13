@@ -4,10 +4,10 @@
 
 # Prepare the image when build
 # also use to minimize the docker image
-FROM node:14-alpine as builder
+FROM node:18-alpine as builder
 
-WORKDIR /app
-COPY package*.json ./
+WORKDIR /server
+COPY package.json ./
 RUN npm install
 COPY . .
 RUN npm run build
@@ -15,14 +15,14 @@ RUN npm run build
 
 # Build the image as production
 # So we can minimize the size
-FROM node:14-alpine
+FROM node:18-alpine
 
-WORKDIR /app
-COPY package*.json ./
-ENV PORT=4000
+WORKDIR /server
+COPY package.json ./
+ENV PORT=${SERVER_PORT}
 ENV NODE_ENV=Production
 RUN npm install
-COPY --from=builder /app/dist ./dist
-EXPOSE ${PORT}
+COPY --from=builder /server/dist ./dist
+EXPOSE ${SERVER_PORT}
 
 CMD ["npm", "run", "start"]

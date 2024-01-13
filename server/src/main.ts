@@ -4,7 +4,7 @@ import { ValidationPipe, VersioningType } from '@nestjs/common'
 import helmet from 'helmet'
 import * as compression from 'compression'
 
-const PORT = parseInt(process.env.PORT, 10) || 4000
+const PORT = process.env.SERVER_PORT || 4000
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)

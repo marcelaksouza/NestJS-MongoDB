@@ -9,7 +9,7 @@ import { UserPayload } from './model/user.payload'
 })
 export class UserController {
   constructor(private readonly userService: UserService) {}
-  
+
   @Post()
   createUser(@Body() body: CreateUserInput): Promise<UserPayload> {
     return this.userService.createUser(body)
