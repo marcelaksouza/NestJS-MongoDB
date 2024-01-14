@@ -1,10 +1,25 @@
-import { Module } from '@nestjs/common'
+import 'dotenv/config'
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { ConfigModule } from '@nestjs/config'
 import { ThrottlerModule } from '@nestjs/throttler'
 import { UserModule } from './user/user.module'
 import { MongooseModule } from '@nestjs/mongoose'
+import { RequestService } from './middleware/request.service'
+import { AuthenticationMiddleware } from './middleware/authentication.middleware'
+
+const URL =
+  'mongodb+srv://' +
+  process.env.DATABASE_USER +
+  ':' +
+  process.env.DATABASE_PASS +
+  '@' +
+  process.env.DATABASE_HOST +
+  '/' +
+  process.env.DATABASE_NAME +
+  '?retryWrites=true&w=majority'
+
 @Module({
   imports: [
     // feature module
@@ -12,9 +27,13 @@ import { MongooseModule } from '@nestjs/mongoose'
 
     ConfigModule.forRoot({ isGlobal: true }),
     ThrottlerModule.forRoot([{ ttl: 60, limit: 10 }]),
-    MongooseModule.forRoot(process.env.DATABASE_URI),
+    MongooseModule.forRoot(URL),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, RequestService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AuthenticationMiddleware).forRoutes('*')
+  }
+}

@@ -1,0 +1,34 @@
+service: nest-serverless
+
+frameworkVersion: '3'
+
+configValidationMode: error
+	
+useDotenv: true
+
+provider: 
+  name: aws
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'eu-west-1'}
+  runtime: nodejs16.x
+  memorySize: 128
+  timeout: 10
+  logRetentionInDays: 1
+
+functions:
+  api:
+    handler: dist/user/lambda.handler
+    events: 
+      - httpApi:
+          method: ANY
+          path: /{proxy+}
+
+custom:
+  # serverless offline plugin setup
+  serverless-offline:
+    httpPort: 4000
+
+plugins:
+  - serverless-jetpack
+  - serverless-offline
+

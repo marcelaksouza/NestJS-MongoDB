@@ -5,7 +5,6 @@ import { UserPayload } from './model/user.payload'
 
 @Controller({
   path: 'users',
-  version: '1',
 })
 export class UserController {
   constructor(private readonly userService: UserService) {}
