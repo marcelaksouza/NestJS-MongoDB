@@ -10,21 +10,21 @@
 
 ## Description
 
-Practicing nestjs for an interview
+Practicing nestjs for an interview <br>
 nestjs - mongoDB - Docker - CRUD API - Serverless - AWS - Terraform
 
 ## Tasks
 
-Add Husky/Commitlint/prettier - Done 
-Create CRUD with nestjs CRUD - Done 
-Add mongoDB - Done
-Deploy docker for server- Done
-Add serverless 
-Deploy backend to AWS using Terraform
-Add jest unit test 
-Add jest end to end test CRUD 
-Add redis
-Add redis into docker container
+Add Husky/Commitlint/prettier - Done <br>
+Create CRUD with nestjs CRUD - Done <br>
+Add mongoDB - Done <br>
+Deploy docker for server - Done <br>
+Add serverless - Done <br>
+Deploy backend to AWS using Terraform <br>
+Add jest unit test <br>
+Add jest end to end test CRUD <br>
+Add redis <br>
+Add redis into docker container <br>
 
 ## Installation
 
