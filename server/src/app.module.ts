@@ -6,8 +6,8 @@ import { ConfigModule } from '@nestjs/config'
 import { ThrottlerModule } from '@nestjs/throttler'
 import { UserModule } from './user/user.module'
 import { MongooseModule } from '@nestjs/mongoose'
-import { RequestService } from './middleware/request.service'
-import { AuthenticationMiddleware } from './middleware/authentication.middleware'
+
+import { LoggerMiddleware } from './utils/logger.middleware'
 
 const URL =
   'mongodb+srv://' +
@@ -30,10 +30,10 @@ const URL =
     MongooseModule.forRoot(URL),
   ],
   controllers: [AppController],
-  providers: [AppService, RequestService],
+  providers: [AppService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthenticationMiddleware).forRoutes('*')
+    consumer.apply(LoggerMiddleware).forRoutes('*')
   }
 }
