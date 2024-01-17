@@ -12,8 +12,10 @@ services:
       dockerfile: Dockerfile
     environment:
       SERVER_PORT: ${SERVER_PORT}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASS: ${DATABASE_PASS}
+      DATABASE_HOST: ${DATABASE_HOST}
       DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_URI: ${DATABASE_URI}
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
 

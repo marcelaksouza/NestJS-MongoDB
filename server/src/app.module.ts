@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
@@ -19,7 +18,7 @@ const URL =
   '/' +
   process.env.DATABASE_NAME +
   '?retryWrites=true&w=majority'
-
+console.log(URL)
 @Module({
   imports: [
     // feature module

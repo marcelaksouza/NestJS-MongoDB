@@ -4,24 +4,24 @@
 
 # Prepare the image when build
 # also use to minimize the docker image
-FROM node:18-alpine as builder
+FROM node:20-alpine as builder
 
 WORKDIR /server
 COPY package.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 COPY . .
 RUN npm run build
 
 
 # Build the image as production
 # So we can minimize the size
-FROM node:18-alpine
+FROM node:20-alpine
 
 WORKDIR /server
 COPY package.json ./
 ENV PORT=${SERVER_PORT}
 ENV NODE_ENV=Production
-RUN npm install
+RUN npm install --legacy-peer-deps
 COPY --from=builder /server/dist ./dist
 EXPOSE ${SERVER_PORT}
 

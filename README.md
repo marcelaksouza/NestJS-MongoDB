@@ -46,6 +46,8 @@ $ yarn runprod
 
 # Start server in docker
 docker-compose up --build
+
+sls offline
 ```
 
 ## Test
